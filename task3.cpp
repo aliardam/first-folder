@@ -64,6 +64,7 @@ int main ()
     IntArray arr(n);
     arr.iota();
     arr.print();
+    cout<<"test?";
 
     return 0;
 }
