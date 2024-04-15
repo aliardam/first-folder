@@ -46,7 +46,36 @@ class HttpRequest : public request {
         return url;
     }
     void log () {
-        cout<<"Request of unknown type from"<<getorigin().getad(1)<<","<<getorigin().getad(2)<<","<<getorigin().getad(3)<<getorigin().getad(4)<<"to"<<geturl()<<endl;
+        cout<<"Request of unknown type from"<<getorigin().getad(1)<<","<<getorigin().getad(2)<<","<<getorigin().getad(3)<<getorigin().getad(4)<<"to url"<<geturl()<<endl;
     }
+
+};
+class GetRequest : public HttpRequest {
+    public:
+    void log () {
+        cout<<"Request of unknown type from"<<getorigin().getad(1)<<","<<getorigin().getad(2)<<","<<getorigin().getad(3)<<getorigin().getad(4)<<"to url"<<geturl()<<endl;
+    }
+};
+class PostRequest : public HttpRequest 
+{
+    string payload;
+
+    public:
+    PostRequest(HttpRequest _req, string _pay) : HttpRequest(_req) , payload(_pay) {}
+    void log () {
+        cout<<"Http POST Request of from"<<getorigin().getad(1)<<","<<getorigin().getad(2)<<","<<getorigin().getad(3)<<getorigin().getad(4)<<"to url "<<geturl()<<"with payroll "<<endl;
+    }
+int main () {
+    GetRequest gr(127, 0, 0, 1, "http://example.com/api");
+gr.log();
+PostRequest pr(127, 0, 0, 1, "http://example.com/api", "{\"password\": \"secret\"}");
+pr.log();
+return 0;
+}
+
+
+
+
+
 
 };
