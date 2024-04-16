@@ -53,7 +53,8 @@ class HttpRequest : public request {
 };
 class GetRequest : public HttpRequest {
     public:
-    GetRequest(unsigned char a, unsigned char b, unsigned char c, unsigned char d, string _url) : HttpRequest(ipv4address(a,b,c, d),_url) , {}
+    GetRequest(unsigned char a, unsigned char b, unsigned char c, unsigned char d, string _url) : HttpRequest(ipv4address(a,b,c, d),_url) {}
+    GetRequest(ipv4address address , string _url) : HttpRequest(address,_url) {}
     void log () {
         cout<<"Request of unknown type from"<<getorigin().getad(1)<<","<<getorigin().getad(2)<<","<<getorigin().getad(3)<<getorigin().getad(4)<<"to url"<<geturl()<<endl;
     }
@@ -63,6 +64,8 @@ class PostRequest : public HttpRequest
     string payload;
 
     public:
+    PostRequest(unsigned char a, unsigned char b, unsigned char c, unsigned char d, string _url,string _pay) : HttpRequest(ipv4address(a,b,c, d),_url) , payload(_pay) {}
+    PostRequest(ipv4address address , string _url, string _pay) : HttpRequest(address,_url) , payload(_pay) {}
     PostRequest(HttpRequest _req, string _pay) : HttpRequest(_req) , payload(_pay) {}
     void log () {
         cout<<"Http POST Request of from"<<getorigin().getad(1)<<","<<getorigin().getad(2)<<","<<getorigin().getad(3)<<getorigin().getad(4)<<"to url "<<geturl()<<"with payroll "<<endl;
