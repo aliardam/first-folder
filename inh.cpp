@@ -38,6 +38,7 @@ class request {
 class HttpRequest : public request {
     string url;
     public:
+    HttpRequest(unsigned char a, unsigned char b, unsigned char c, unsigned char d, string _url) : request(ipv4address(a,b,c, d)) , url(_url) {}
     HttpRequest(ipv4address address , string _url) : request(address) , url(_url) {}
     void seturl(string _url){
         url = _url;
@@ -52,6 +53,7 @@ class HttpRequest : public request {
 };
 class GetRequest : public HttpRequest {
     public:
+    GetRequest(unsigned char a, unsigned char b, unsigned char c, unsigned char d, string _url) : HttpRequest(ipv4address(a,b,c, d),_url) , {}
     void log () {
         cout<<"Request of unknown type from"<<getorigin().getad(1)<<","<<getorigin().getad(2)<<","<<getorigin().getad(3)<<getorigin().getad(4)<<"to url"<<geturl()<<endl;
     }
